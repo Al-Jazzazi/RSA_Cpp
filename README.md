@@ -20,17 +20,17 @@ The project provides two versions of RSA encryption:
 
 1. **`encryption.cpp`**: This file uses `unsigned long long int` for modular exponentiation and a brute-force modular inverse (`find_d`) implementation. It is less efficient and should be used for educational purposes or small values only.
    
-2. **`encryption_updated.cpp`**: This file uses **GMP**'s `mpz_class` type for arbitrary-precision arithmetic, which allows for much larger numbers, making it suitable for actual cryptographic use cases. It includes optimized modular exponentiation and modular inverse calculations, leveraging the Extended Euclidean Algorithm.
+2. **`encryption_optimized.cpp`**: This file uses **GMP**'s `mpz_class` type for arbitrary-precision arithmetic, which allows for much larger numbers, making it suitable for actual cryptographic use cases. It includes optimized modular exponentiation and modular inverse calculations, leveraging the Extended Euclidean Algorithm.
 
 ## Files in Project
 
 - **`encryption.cpp`**: Basic RSA encryption with `unsigned long long int` and brute-force modular inverse.
-- **`encryption_updated.cpp`**: Optimized RSA encryption with GMP's `mpz_class` for large number support.
+- **`encryption_optimized.cpp`**: Optimized RSA encryption with GMP's `mpz_class` for large number support.
 
 ## Dependencies
 
 - **macOS**: This project relies on macOS's `SecRandomCopyBytes` for secure random byte generation.
-- **GMP Library (GNU Multiple Precision Arithmetic)**: Required only for `encryption_updated.cpp` to handle large numbers and provide optimized arithmetic functions.
+- **GMP Library (GNU Multiple Precision Arithmetic)**: Required only for `encryption_optimized.cpp` to handle large numbers and provide optimized arithmetic functions.
 
 ## Installation
 
@@ -85,7 +85,7 @@ Run the program with:
 - Implements `find_d` (modular inverse) with a brute-force algorithm, which is slower and less efficient for larger values.
 - Provides basic RSA functionality: it generates random prime numbers, computes the public and private keys, and performs encryption and decryption.
 
-### 2. `encryption_updated.cpp`
+### 2. `encryption_optimized.cpp`
 
 - Uses **GMP**'s `mpz_class` for arbitrary-precision arithmetic, enabling it to handle large RSA key sizes securely.
 - Includes optimized functions for modular exponentiation and modular inverse (`find_d`) using the Extended Euclidean Algorithm, which is faster and more suitable for cryptographic use cases.
