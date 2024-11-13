@@ -16,7 +16,7 @@ unsigned long long generate_secure_random_bytes(size_t length =8) {
         // std::cout << std::hex << (int)buffer[i] << " "; 
     }
        
-    return number;
+    return (int)number;
 }
 
 bool isPrime(unsigned long long num) {
@@ -48,34 +48,12 @@ bool areCoprime(unsigned long long a, unsigned long long b) {
 
 
 unsigned long long find_d(unsigned long long A, unsigned long long M) {
-    unsigned long long m0 = M;
-    unsigned long long y = 0, x = 1;
-
-    if (M == 1) {
-        return 0; // No modular inverse exists if M == 1
+    for (unsigned long long d = 1; d < M; ++d) {
+        if ((A * d) % M == 1) {
+            return d;
+        }
     }
-
-    while (A > 1) {
-        // q is quotient
-        unsigned long long q = A / M;
-        unsigned long long t = M;
-
-        // Apply Euclid's algorithm
-        M = A % M;
-        A = t;
-        t = y;
-
-        // Update y and x
-        y = x - q * y;
-        x = t;
-    }
-
-    // Make x positive if necessary
-    if (x < 0) {
-        x += m0;
-    }
-
-    return x;
+    return 0;  // Return 0 if no modular inverse is found (when A and M are not coprime)
 }
 
 long long mod_exp(unsigned long long base, unsigned long long exp, unsigned long long mod){
@@ -108,6 +86,7 @@ std::vector<unsigned long long> encrypt(std::string str,unsigned long long e, un
     return c; 
 }
 
+
 std::vector<unsigned long long> decrypt(std::vector<unsigned long long> crypted,unsigned long long d, unsigned long long n){
     std::vector<unsigned long long > c; 
     for(auto i = 0; i < crypted.size(); i++){
@@ -135,14 +114,14 @@ void generating_primes(unsigned long long& p, unsigned long long&q, size_t lengt
 void find_e(unsigned long long& e, const unsigned long long phi, size_t length){
     e = 3;
     while(!areCoprime(phi,e) || e > phi ){
-        e  = generate_secure_random_bytes(length/2);
+        e  = generate_secure_random_bytes(length);
     }
 
 }
 
 
 int main(int argc, char* argv[]) {
-    size_t length = 1; 
+    size_t length = 2; 
     unsigned long long p;
     unsigned long long q; 
     generating_primes(p, q, length);
@@ -173,7 +152,7 @@ int main(int argc, char* argv[]) {
         }
         std::cout << "\nM size is " << m.size() << "\n";
         for(auto l: m){
-            std::cout <<l << " "; 
+            std::cout <<(char)l << " "; 
         }
         c.clear();
         std::cout << "\n"; 
