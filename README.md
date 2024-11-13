@@ -39,7 +39,7 @@ To install GMP on macOS, use **Homebrew**:
 ```bash
 brew install gmp
 ```
-installation is only needed to run the 
+installation is only needed to run the encryption_optimized.cpp version 
 
 ## Compiling and Running
 
