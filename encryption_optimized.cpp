@@ -54,37 +54,6 @@ bool areCoprime(mpz_class a, mpz_class b) {
 }
 
 
-unsigned long long find_d(unsigned long long A, unsigned long long M) {
-    unsigned long long m0 = M;
-    unsigned long long y = 0, x = 1;
-
-    if (M == 1) {
-        return 0; // No modular inverse exists if M == 1
-    }
-
-    while (A > 1) {
-        // q is quotient
-        unsigned long long q = A / M;
-        unsigned long long t = M;
-
-        // Apply Euclid's algorithm
-        M = A % M;
-        A = t;
-        t = y;
-
-        // Update y and x
-        y = x - q * y;
-        x = t;
-    }
-
-    // Make x positive if necessary
-    if (x < 0) {
-        x += m0;
-    }
-
-    return x;
-}
-
 mpz_class mod_exp(mpz_class base, mpz_class exp, mpz_class mod){
     mpz_class result =1 ; 
     mpz_class prev = base % mod;
